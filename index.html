@@ -1,24 +1,163 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Storage Fleet — interactive, fictional eight-computer disk-space and cleanup demo."><title>Storage Fleet / Demo</title><style>
-:root{color-scheme:dark;--bg:#0b1018;--panel:#131b27;--line:#283447;--muted:#a1b0c5;--text:#edf3fa;--green:#69e6b0;--orange:#ffc170;--red:#ff858f}*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--text)}button,select,input{font:inherit}button,select{color:inherit;background:#1c293a;border:1px solid var(--line);border-radius:9px;padding:9px 13px;cursor:pointer}button:hover{border-color:var(--green)}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}h1,h2,h3,p{margin:0}h1{font-size:clamp(26px,4vw,40px);letter-spacing:-1.5px}h2{font-size:20px}small,.muted{color:var(--muted)}header{border-bottom:1px solid var(--line);padding:20px max(24px,calc((100vw - 1340px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:800;letter-spacing:1px}.brand span{color:var(--green)}.pill{font-size:11px;letter-spacing:1px;border:1px solid var(--line);border-radius:30px;padding:5px 10px;color:var(--green)}main{max-width:1388px;padding:34px 24px 40px;margin:auto}.heading{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}.eyebrow{font-size:11px;color:var(--green);letter-spacing:2px;font-weight:700;margin-bottom:8px}.notice{background:#152a28;border:1px solid #285049;border-radius:10px;padding:12px 16px;color:#b3e7d3;font-size:13px;margin-bottom:24px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}.stat{padding:20px}.stat strong{display:block;font-size:29px;letter-spacing:-1px;margin:6px 0}.stat small{font-size:12px}.layout{display:grid;grid-template-columns:minmax(300px, .95fr) minmax(440px,1.4fr);gap:22px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px}.hosts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.host{display:block;text-align:left;border-radius:13px;padding:17px;background:var(--panel);min-width:0}.host[aria-pressed=true]{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}.host-top{display:flex;justify-content:space-between;gap:6px;align-items:center}.host strong{font-size:15px}.os{font-size:11px;color:var(--muted);display:block;margin-top:3px}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}.dot.warn{background:var(--orange)}.dot.danger{background:var(--red)}.bar{height:6px;background:#2a3648;border-radius:8px;overflow:hidden;margin:16px 0 9px}.bar span{display:block;height:100%;background:var(--green);border-radius:8px}.bar span.warn{background:var(--orange)}.bar span.danger{background:var(--red)}.capacity{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);gap:4px}.panel-head{padding:22px;border-bottom:1px solid var(--line)}.panel-head .section-title{margin-bottom:12px}.path{font:12px ui-monospace,monospace;color:#b5c6dc;background:#0b121e;padding:10px 12px;border-radius:7px;overflow-wrap:anywhere}.folders{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.folders button{font-size:12px;padding:6px 10px}.folders button[aria-pressed=true]{background:#284a43;border-color:#548a78}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;font-size:10px;letter-spacing:1px;color:var(--muted);padding:12px 18px;background:#101824}td{padding:14px 18px;border-top:1px solid #202c3d}td:last-child,th:last-child{text-align:right;white-space:nowrap}.file-name{font-weight:600;white-space:nowrap}.file-name small{display:block;font-weight:400;font-size:11px}.file-label{display:flex;gap:12px;align-items:center}input{accent-color:var(--green);width:16px;height:16px}.tag{font-size:10px;padding:3px 7px;border-radius:5px;background:#1d3a32;color:var(--green)}.tag.keep{background:#293447;color:#bbc7d7}.cleanup{padding:20px 22px;border-top:1px solid var(--line)}.cleanup-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:15px}.cleanup strong{font-size:25px}.actions{display:flex;gap:8px;flex-wrap:wrap}.primary{background:var(--green);color:#0d281e;border-color:var(--green);font-weight:750}.status{margin-top:12px;font-size:12px;min-height:18px;color:var(--green)}footer{margin-top:25px;display:flex;justify-content:space-between;gap:20px;font-size:12px;color:var(--muted)}dialog{max-width:480px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);padding:26px}dialog::backdrop{background:#000a;backdrop-filter:blur(4px)}dialog p{margin:14px 0 24px;color:var(--muted)}.empty{padding:35px;color:var(--muted);text-align:center}@media(max-width:1000px){.layout{grid-template-columns:1fr}.hosts{grid-template-columns:repeat(4,1fr)}}@media(max-width:650px){main{padding:24px 16px}.heading{align-items:flex-start}.stats{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat strong{font-size:25px}.hosts{grid-template-columns:1fr 1fr}.heading>button{font-size:12px}header{padding:16px}.pill{font-size:9px}.panel-head{padding:16px}td,th{padding:12px}.cleanup{padding:16px}footer{flex-direction:column;gap:5px}.section-title select{max-width:150px}}
-</style></head><body>
-<header><div class="brand"><span>▦</span> STORAGE FLEET</div><span class="pill">INTERACTIVE DEMO</span></header>
-<main><div class="heading"><div><p class="eyebrow">WORKSPACE / STORAGE HEALTH</p><h1>Make room for what’s next.</h1><p class="muted">Eight machines. One clear view of your space.</p></div><button id="reset">↺ Reset demo</button></div>
-<div class="notice"><strong>Sandbox, not system access.</strong> All computers and files are fictional. Cleanup is simulated in memory only: no agents, real file access, deletion, or application network requests.</div>
-<section class="stats" aria-label="Fleet overview"><div class="stat"><small>FLEET CAPACITY</small><strong id="total"></strong><small>8 computers · 3 operating systems</small></div><div class="stat"><small>AVAILABLE SPACE</small><strong id="free"></strong><small id="free-percent"></small></div><div class="stat"><small>CLEANUP OPPORTUNITY</small><strong id="reclaimable"></strong><small>Demo-designated candidates only</small></div><div class="stat"><small>NEEDS ATTENTION</small><strong id="attention"></strong><small>Less than 15% free space</small></div></section>
-<div class="layout"><section aria-labelledby="fleet-title"><div class="section-title"><h2 id="fleet-title">Your fleet <small>/ 08</small></h2><label><span class="muted">OS </span><select id="os" aria-label="Filter operating system"><option>All systems</option><option>Windows</option><option>Linux</option><option>macOS</option></select></label></div><div class="hosts" id="hosts"></div></section>
-<section class="panel" aria-labelledby="browser-title"><div class="panel-head"><div class="section-title"><div><p class="eyebrow">FILESYSTEM EXPLORER</p><h2 id="browser-title"></h2></div><span class="pill">MOCK DATA</span></div><div class="path" id="path"></div><nav class="folders" id="folders" aria-label="Browse folders"></nav></div><div class="table-wrap"><table><thead><tr><th scope="col">FILE / FOLDER</th><th scope="col">CLASS</th><th scope="col">SIZE</th></tr></thead><tbody id="files"></tbody></table></div><div class="cleanup"><div class="cleanup-top"><div><small>SELECTED TO RECLAIM</small><div><strong id="selected-size">0 GB</strong> <small id="selected-count"></small></div></div><button id="select-all">Select candidates</button></div><div class="actions"><button class="primary" id="preview" disabled>Preview cleanup →</button><button id="undo" disabled>Undo last cleanup</button></div><p class="status" id="status" role="status" aria-live="polite">Explore a machine, then select demo cleanup candidates.</p></div></section></div>
-<footer><span>Storage Fleet · Concept interface · No real devices connected</span><span>Decimal units: 1 GB = 1,000,000,000 bytes · State resets on reload</span></footer></main>
-<dialog id="confirm"><h2>Preview simulated cleanup</h2><p id="summary"></p><div class="actions"><button id="cancel">Cancel</button><button class="primary" id="apply">Simulate cleanup</button></div></dialog>
-<script>
-'use strict';
-const GB=1e9;
-const seeds=[['Atlas','Windows',1000,910,42],['Nova','macOS',500,330,28],['Orbit','Linux',2000,1280,96],['Cedar','Windows',500,465,34],['Lumen','macOS',1000,620,54],['Relay','Linux',1000,760,68],['Pixel','Windows',2000,1190,120],['Echo','Linux',500,390,31]];
-function initialFleet(){return seeds.map(([name,os,capacity,used,cleanup],i)=>({id:i,name,os,capacity:capacity*GB,baseUsed:used*GB,files:[{id:'cache',name:'Application cache',folder:'Caches',size:cleanup*.5*GB,safe:true},{id:'build',name:'Old build artifacts',folder:'Builds',size:cleanup*.3*GB,safe:true},{id:'download',name:'Archived installer',folder:'Downloads',size:cleanup*.2*GB,safe:true},{id:'project',name:'Active project',folder:'Projects',size:18*GB,safe:false},{id:'system',name:'System & other data',folder:'System',size:(used-cleanup-18)*GB,safe:false}]}));}
-let fleet=initialFleet(),active=0,folder='All files',selected=new Set(),history=[];
-const $=id=>document.getElementById(id),sum=(xs,fn)=>xs.reduce((a,x)=>a+fn(x),0),fmt=n=>n>=1e12?(n/1e12).toFixed(2)+' TB':(n/GB).toLocaleString('en-US',{maximumFractionDigits:1})+' GB',host=()=>fleet.find(h=>h.id===active),used=h=>sum(h.files,f=>f.size),available=h=>h.capacity-used(h),candidates=h=>h.files.filter(f=>f.safe),chosen=()=>host().files.filter(f=>selected.has(f.id)&&f.safe),selectedBytes=()=>sum(chosen(),f=>f.size);
-function render(){const capacity=sum(fleet,h=>h.capacity),free=sum(fleet,available);$('total').textContent=fmt(capacity);$('free').textContent=fmt(free);$('free-percent').textContent=(free/capacity*100).toFixed(1)+'% of fleet capacity';$('reclaimable').textContent=fmt(sum(fleet,h=>sum(candidates(h),f=>f.size)));$('attention').textContent=fleet.filter(h=>available(h)/h.capacity<.15).length+' / 8';$('hosts').innerHTML=fleet.filter(h=>$('os').value==='All systems'||h.os===$('os').value).map(h=>{const pct=used(h)/h.capacity*100,level=pct>90?'danger':pct>85?'warn':'';return `<button class="host" data-host="${h.id}" aria-pressed="${h.id===active}" aria-label="${h.name}, ${h.os}, ${fmt(available(h))} free"><div class="host-top"><strong>${h.name}</strong><span class="dot ${level}"></span></div><span class="os">${h.os} · ${fmt(h.capacity)}</span><div class="bar"><span class="${level}" style="width:${pct}%"></span></div><div class="capacity"><span>${fmt(available(h))} free</span><span>${pct.toFixed(0)}% used</span></div></button>`}).join('');
-const h=host();$('browser-title').textContent=h.name+' / '+h.os;$('path').textContent=(h.os==='Windows'?'C:\\Demo\\':h.os==='macOS'?'/Users/demo/':'/home/demo/')+(folder==='All files'?'':folder);$('folders').innerHTML=['All files','Caches','Builds','Downloads','Projects','System'].map(f=>`<button data-folder="${f}" aria-pressed="${folder===f}">${f}</button>`).join('');const visible=h.files.filter(f=>folder==='All files'||f.folder===folder);$('files').innerHTML=visible.length?visible.map(f=>`<tr><td><label class="file-label"><input type="checkbox" data-file="${f.id}" ${f.safe?'':'disabled'} ${selected.has(f.id)?'checked':''} aria-label="${f.safe?'Select':'Protected'} ${f.name}"><span class="file-name">${f.name}<small>${f.folder} / ${f.safe?'Demo cleanup candidate':'Protected · not selectable'}</small></span></label></td><td><span class="tag ${f.safe?'':'keep'}">${f.safe?'Candidate':'Keep'}</span></td><td>${fmt(f.size)}</td></tr>`).join(''):'<tr><td colspan="3" class="empty">This demo folder is empty.</td></tr>';$('undo').disabled=!history.length;$('select-all').disabled=!candidates(h).length;renderSelection();}
-function renderSelection(){$('selected-size').textContent=fmt(selectedBytes());$('selected-count').textContent=chosen().length+' items · across this machine';$('preview').disabled=!chosen().length;}
-$('hosts').addEventListener('click',e=>{const b=e.target.closest('[data-host]');if(!b)return;active=Number(b.dataset.host);folder='All files';selected.clear();render();});$('folders').addEventListener('click',e=>{const b=e.target.closest('[data-folder]');if(!b)return;folder=b.dataset.folder;render();});$('files').addEventListener('change',e=>{if(!e.target.matches('[data-file]'))return;e.target.checked?selected.add(e.target.dataset.file):selected.delete(e.target.dataset.file);renderSelection();});$('os').addEventListener('change',()=>{const matches=fleet.filter(h=>$('os').value==='All systems'||h.os===$('os').value);if(!matches.some(h=>h.id===active)){active=matches[0].id;folder='All files';selected.clear();}render();});$('select-all').onclick=()=>{selected=new Set(candidates(host()).map(f=>f.id));render();};$('preview').onclick=()=>{if(!chosen().length)return;$('summary').textContent=`Simulate removing ${chosen().length} demo items from ${host().name} to reclaim ${fmt(selectedBytes())}? Available space would become ${fmt(available(host())+selectedBytes())}. No real files will be accessed or deleted. You can undo this simulation.`;$('confirm').showModal();};$('cancel').onclick=()=>$('confirm').close();$('apply').onclick=()=>{if(!chosen().length){$('confirm').close();return;}const reclaimed=selectedBytes(),name=host().name;history.push(JSON.stringify(fleet));host().files=host().files.filter(f=>!selected.has(f.id)||!f.safe);selected.clear();$('confirm').close();render();$('status').textContent=`Simulated ${fmt(reclaimed)} reclaimed on ${name}. No real files changed.`;};$('undo').onclick=()=>{if(!history.length)return;fleet=JSON.parse(history.pop());selected.clear();render();$('status').textContent='Last simulated cleanup undone.';};$('reset').onclick=()=>{fleet=initialFleet();history=[];selected.clear();active=0;folder='All files';$('os').value='All systems';$('confirm').close();render();$('status').textContent='Demo reset. All eight fictional machines restored.';};render();
-</script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An eight-machine fictional storage atlas. Explore disk space and safely simulate cleanup."
+    />
+    <title>Storage Fleet — a space atlas</title>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href="./">STORAGE / FLEET</a
+      ><span>FIELD NOTES № 08 <b>SIMULATION</b></span>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <p class="eyebrow">EIGHT MACHINES. ONE SPACE ATLAS.</p>
+          <h1>Room to work.</h1>
+          <p class="subtitle">
+            See what occupies your disks. Make a considered choice.
+          </p>
+        </div>
+        <button id="reset">Reset all demo data ↺</button>
+      </div>
+      <p class="notice">
+        <strong>Fictional data, real interaction.</strong> No connected devices,
+        agents, scanning or deletion. Every change is a reversible, in-memory
+        simulation.
+      </p>
+      <section class="metrics" aria-label="Fleet totals">
+        <div>
+          <span>Capacity</span><strong id="total"></strong
+          ><small>Across all eight machines</small>
+        </div>
+        <div>
+          <span>Available</span><strong id="free"></strong
+          ><small id="free-percent"></small>
+        </div>
+        <div>
+          <span>Candidate space</span><strong id="reclaimable"></strong
+          ><small>Illustrative, not deletion advice</small>
+        </div>
+        <div>
+          <span>Under 15% free</span><strong id="attention"></strong
+          ><small>Attention threshold, unrounded</small>
+        </div>
+      </section>
+      <div class="workspace">
+        <aside>
+          <div class="section-heading">
+            <h2>01 / Machines</h2>
+            <label class="filter"
+              >OS
+              <select id="os" aria-label="Filter operating system">
+                <option>All systems</option>
+                <option>Windows</option>
+                <option>Linux</option>
+                <option>macOS</option>
+              </select></label
+            >
+          </div>
+          <p class="caption">
+            Bars share a 0–100% capacity scale.<br />Amber marks less than 15%
+            free.
+          </p>
+          <div class="host-axis">
+            <span>COMPUTER</span><span>FREE / CAPACITY</span>
+          </div>
+          <div id="hosts"></div>
+          <p class="margin-note">
+            Fleet totals stay fleet-wide when the machine list is filtered.
+          </p>
+        </aside>
+        <section class="explorer" aria-labelledby="browser-title">
+          <div class="section-heading">
+            <h2 id="browser-title"></h2>
+            <span id="host-free"></span>
+          </div>
+          <div class="visualization">
+            <div class="chart-block">
+              <div id="disk-map"></div>
+              <p class="caption">
+                Angle = share of capacity. Outer marks = cleanup candidates.
+                Select a segment to inspect its folder.
+              </p>
+            </div>
+            <div class="distribution">
+              <h3>Where the space goes</h3>
+              <div id="legend"></div>
+              <p class="margin-note">
+                Protected data stays put. “Candidate” means eligible for this
+                demo only.
+              </p>
+            </div>
+          </div>
+          <div class="browser">
+            <div class="browser-toolbar">
+              <h3>02 / Inspect files</h3>
+              <span id="path"></span>
+            </div>
+            <nav id="folders" aria-label="Browse folders"></nav>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Record / folder</th>
+                    <th>Handling</th>
+                    <th>Size</th>
+                  </tr>
+                </thead>
+                <tbody id="files"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="cleanup">
+            <div>
+              <span class="eyebrow">03 / SIMULATED RECLAIM</span>
+              <p>
+                <strong id="selected-size">0 GB</strong>
+                <span id="selected-count"></span>
+              </p>
+            </div>
+            <div class="actions">
+              <button id="select-all">Select candidates</button
+              ><button id="preview" class="primary" disabled>
+                Review cleanup →</button
+              ><button id="undo" disabled>Undo last</button>
+            </div>
+          </div>
+          <p id="status" role="status" aria-live="polite">
+            Select a machine or inspect a disk segment to begin.
+          </p>
+        </section>
+      </div>
+      <footer>
+        <span
+          >Original visualization · Synthetic fixtures · Decimal GB / TB</span
+        ><a href="./evidence/">Desktop & mobile recordings ↗</a>
+      </footer>
+    </main>
+    <dialog
+      id="confirm"
+      aria-labelledby="dialog-title"
+      aria-describedby="summary"
+    >
+      <p class="eyebrow">REVIEW BEFORE SIMULATING</p>
+      <h2 id="dialog-title">Reclaim, without risk.</h2>
+      <p id="summary"></p>
+      <p class="caption">
+        No real files are accessed or deleted. Undo restores this simulation
+        exactly.
+      </p>
+      <div class="actions">
+        <button id="cancel" autofocus>Cancel</button
+        ><button id="apply" class="primary">Simulate cleanup</button>
+      </div>
+    </dialog>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

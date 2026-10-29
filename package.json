@@ -1,0 +1,29 @@
+{
+  "name": "storage-fleet-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build --base=./",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc",
+    "test": "node test.cjs",
+    "test:ui": "playwright test",
+    "check": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run build",
+    "evidence": "node scripts/evidence.js",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/node": "26.6.6",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  }
+}
